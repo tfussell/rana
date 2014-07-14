@@ -1,9 +1,9 @@
-//
-//  printer.cpp
-//  soya3
-//
-//  Created by Thomas Fussell on 7/13/14.
-//  Copyright (c) 2014 Fussell Technologies Inc. All rights reserved.
-//
-
 #include "printer.hpp"
+
+namespace rana {
+
+printer::printer() : encoding_(rana::encoding::utf8), indent_(true), indent_length_(4), space_before_(true), space_after_(true)
+{
+}
+
+} // namespace rana

@@ -43,6 +43,7 @@ public:
     public:
         const_array_iterator() : array_(nullptr), index_(0) {}
         const_array_iterator(const container_pointer array, std::size_t index) : array_(array), index_(index) {}
+        const_array_iterator &operator=(const const_array_iterator &) = delete;
         bool operator==(const const_array_iterator &comparand) const { return array_ == comparand.array_ && index_ == comparand.index_; }
         bool operator!=(const const_array_iterator &comparand) const { return !(*this == comparand); }
         const_array_iterator operator++(int) { const_array_iterator copy(array_, index_); index_++; return copy; }
@@ -156,6 +157,8 @@ public:
         {
             advance();
         }
+
+        const_object_iterator &operator=(const const_object_iterator &) = delete;
         
         bool operator==(const const_object_iterator &comparand) const
         {
@@ -528,7 +531,7 @@ private:
             return;
         }
         
-        std::size_t required_size = n / max_load_factor();
+        std::size_t required_size = (std::size_t)(n / max_load_factor());
         
         if(required_size <= size_)
         {

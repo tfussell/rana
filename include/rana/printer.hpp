@@ -10,9 +10,7 @@ namespace rana {
 class printer
 {
 public:
-    printer() : encoding_(rana::encoding::utf8), indent_(true), indent_length_(4), space_before_(true), space_after_(true)
-    {
-    }
+    printer();
     
     printer &encoding(rana::encoding e) { encoding_ = e; return *this; }
     rana::encoding get_encoding() const { return encoding_; }
