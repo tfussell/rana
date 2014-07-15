@@ -683,12 +683,24 @@ public:
 		case type::true_t:
 		case type::false_t:
 		case type::invalid_t:
+            {
 			return true;
+            }
 		case type::number_t:
-			return std::abs(number_value_ - rhs.number_value_) < 0.0001;
+            {
+            auto difference = number_value_ - rhs.number_value_;
+            if(difference < 0)
+            {
+                difference *= -1;
+            }
+			return difference < 0.0001;
+            }
 		case type::string_t:
+            {
 			return string_value_ == rhs.string_value_;
+            }
 		case type::object_t:
+            {
 			if (size_ != rhs.size_ || count_ != rhs.count_)
 			{
 				return false;
@@ -704,7 +716,9 @@ public:
 				}
 			}
 			break;
+            }
 		case type::array_t:
+            {
 			if (size_ != rhs.size_ || count_ != rhs.count_)
 			{
 				return false;
@@ -718,6 +732,7 @@ public:
 				}
 			}
 			break;
+            }
 		}
 
 		return true;
