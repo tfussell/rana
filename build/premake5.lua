@@ -4,7 +4,7 @@ solution "rana"
     location ("./" .. _ACTION)
     configuration "debug"
         flags { "Symbols" }
-		optimize "Off"
+	optimize "Off"
     configuration "release"
         optimize "Full"
 
@@ -19,7 +19,7 @@ project "rana.test"
     files { 
        "../tests/*.hpp",
        "../tests/runner-autogen.cpp",
-        "../include/rana/rana.hpp"
+        "../include/rana/*.hpp"
     }
     prebuildcommands { "/usr/local/Cellar/cxxtest/4.3/bin/cxxtestgen --runner=ErrorPrinter -o ../../tests/runner-autogen.cpp ../../tests/*.hpp" }
     flags { 
@@ -52,7 +52,7 @@ project "rana.benchmark"
     }
     files { 
         "../benchmark/main.cpp",
-        "../include/rana/rana.hpp"
+        "../include/rana/*.hpp"
     }
     flags { 
        "Unicode",

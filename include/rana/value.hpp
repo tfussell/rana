@@ -246,14 +246,20 @@ public:
 	{
 		size_ = rhs.size_;
 		count_ = rhs.count_;
-		if (size_ > 0)
-		{
-			container_ = new container_value[size_];
-			std::copy(rhs.container_, rhs.container_ + rhs.size_, container_);
-		}
 		max_load_factor_ = rhs.max_load_factor_;
 		string_value_ = rhs.string_value_;
 		number_value_ = rhs.number_value_;
+
+        if(size_ > 0)
+        {
+            container_ = new container_value[size_];
+#ifdef _WIN32
+            auto last = stdext::checked_array_iterator<container_pointer>(container_, size_);
+#else
+            auto last = container_;
+#endif
+            std::copy(rhs.container_, rhs.container_ + rhs.size_, last);
+        }
 	}
 
 	value(std::initializer_list<value> ilist) : value(type::array_t)
@@ -883,17 +889,20 @@ private:
 
 	void grow()
 	{
-		if (size_ == 0)
-		{
-			container_ = new container_value[initial_size];
-			size_ = initial_size;
-			return;
-		}
-
-		size_ *= 2;
-		container_pointer old = container_;
+		size_ = size_ == 0 ? initial_size : size_ * 2;
+        container_pointer old = container_;
 		container_ = new container_value[size_];
-		std::copy(old, old + count_, container_);
+
+        if(count_ > 0 && old != nullptr)
+        {
+#ifdef _WIN32
+            auto last = stdext::checked_array_iterator<container_pointer>(container_, size_);
+#else
+            auto last = container_;
+#endif
+            std::copy(old, old + count_, last);
+        }
+
 		delete[] old;
 	}
 

@@ -628,7 +628,18 @@ bool parser::scan(char c)
 				unicode_nibble_ = 0;
 			}
 
-			token_string_.append(1, c);
+            unsigned char u = c;
+
+            if(u <= 0x7F)
+            {
+                token_string_.append(1, c);
+            }
+            else
+            {
+                token_string_.append(1, 0xC0 + (u >> 6));
+                token_string_.append(1, 0x80 + (u & 0x3F));
+            }
+
 			state_ = state::string;
 		}
 	}
