@@ -7,9 +7,8 @@
 
 void benchmark()
 {
-
     std::fstream file("sample.json");
-    std::stringstream ss;
+	std::stringstream ss;
     ss << file.rdbuf();
     std::string file_string = ss.str();
 
@@ -20,8 +19,7 @@ void benchmark()
     
     for(int i = 0; i < 1000; i++)
     {
-        parser.set_buffer(file_string.data(), file_string.length());
-        parser.parse_next(result);
+		parser.parse_string(file_string, result);
     }
     
 	auto elapsed = std::chrono::high_resolution_clock::now() - start;

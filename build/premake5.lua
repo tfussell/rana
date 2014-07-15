@@ -4,7 +4,7 @@ solution "rana"
     location ("./" .. _ACTION)
     configuration "debug"
         flags { "Symbols" }
-	optimize "Off"
+		optimize "Off"
     configuration "release"
         optimize "Full"
 
@@ -18,23 +18,22 @@ project "rana.test"
     }
     files { 
        "../tests/*.hpp",
-       "../tests/runner-autogen.cpp"
+       "../tests/runner-autogen.cpp",
+        "../include/rana/rana.hpp"
     }
-    links { "rana" }
     prebuildcommands { "/usr/local/Cellar/cxxtest/4.3/bin/cxxtestgen --runner=ErrorPrinter -o ../../tests/runner-autogen.cpp ../../tests/*.hpp" }
     flags { 
        "Unicode",
        "NoEditAndContinue",
        "NoManifest",
-       "NoPCH"       
+       "NoPCH",
+       "NoBufferSecurityCheck"       
     }
     configuration "debug"
 	targetdir "../bin"
     configuration "release"
-        flags { 
-	    "LinkTimeOptimization",
-	    "OptimizeSpeed"
-	}
+        flags { "LinkTimeOptimization" }
+        optimize "Full"
 	targetdir "../bin"
     configuration "not windows"
         buildoptions { 
@@ -52,53 +51,22 @@ project "rana.benchmark"
        "../include/rana"
     }
     files { 
-        "../benchmark/main.cpp"
+        "../benchmark/main.cpp",
+        "../include/rana/rana.hpp"
     }
-    links { "rana" }
     flags { 
        "Unicode",
        "NoEditAndContinue",
        "NoManifest",
-       "NoPCH"
+       "NoPCH",
+       "NoBufferSecurityCheck"
     }
     configuration "debug"
 	targetdir "../bin"
     configuration "release"
         flags { "LinkTimeOptimization" }
+        optimize "Full"
 	targetdir "../bin"
-    configuration "not windows"
-        buildoptions { 
-            "-std=c++11",
-            "-Wno-unknown-pragmas"
-        }
-    configuration { "not windows", "debug" }
-        buildoptions { "-ggdb" }
-
-project "rana"
-    kind "StaticLib"
-    language "C++"
-    warnings "Extra"
-    targetdir "../lib/"
-    includedirs { 
-       "../include/rana"
-    }
-    files {
-       "../source/**.cpp",
-       "../include/rana/**.hpp"
-    }
-    flags { 
-       "Unicode",
-       "NoEditAndContinue",
-       "NoManifest",
-       "NoPCH"
-    }
-    configuration "debug"
-        flags { "FatalWarnings" }
-    configuration "release"
-        flags { 
-	    "LinkTimeOptimization",
-	    "OptimizeSpeed"
-	}
     configuration "not windows"
         buildoptions { 
             "-std=c++11",
