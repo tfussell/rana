@@ -12,11 +12,11 @@ void benchmark()
     std::stringstream ss;
     ss << file.rdbuf();
     std::string file_string = ss.str();
-    rana::parser parser;
-    rana::value result;
 
-    std::chrono::high_resolution_clock clock;
-    auto start = clock.now();
+    auto start = std::chrono::high_resolution_clock::now();
+
+	rana::parser parser;
+	rana::value result;
     
     for(int i = 0; i < 1000; i++)
     {
@@ -24,12 +24,14 @@ void benchmark()
         parser.parse_next(result);
     }
     
-    auto elapsed = clock.now() - start;
-    std::cout << elapsed.count() / 10000000.0 << std::endl;
+	auto elapsed = std::chrono::high_resolution_clock::now() - start;
+    std::cout << elapsed.count() * 1.0 / std::chrono::high_resolution_clock::period::den << std::endl;
 }
 
 int main()
 {
     benchmark();
+	int a = 0;
+	std::cin >> a;
     return 0;
 }
