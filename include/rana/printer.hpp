@@ -7,7 +7,7 @@ namespace rana {
 class printer
 {
 public:
-	printer() : encoding_(rana::encoding::ascii), indent_(true), indent_length_(4), space_before_(true), space_after_(true)
+	printer() : encoding_(rana::encoding::utf8), indent_(true), indent_length_(4), space_before_(true), space_after_(true)
 	{
 	}
 

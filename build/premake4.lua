@@ -16,9 +16,9 @@ project "rana.test"
     }
     files {
        "../tests/*.hpp",
-       "../tests/runner-autogen.cpp"
+       "../tests/runner-autogen.cpp",
+       "../include/rana/*.hpp"
     }
-    links { "rana" }
     prebuildcommands { "/usr/local/Cellar/cxxtest/4.3/bin/cxxtestgen --runner=ErrorPrinter -o ../../tests/runner-autogen.cpp ../../tests/*.hpp" }
     flags { 
        "Unicode",
@@ -27,6 +27,8 @@ project "rana.test"
     }
     configuration "debug"
         targetsuffix "d"
+    configuration "release"
+        flags { "Optimize" }
     configuration "not windows"
         buildoptions { 
             "-std=c++11",
@@ -44,38 +46,8 @@ project "rana.benchmark"
        "../include/rana"
     }
     files {
-       "../benchmark/main.cpp"
-    }
-    links { "rana" }
-    flags { 
-       "Unicode",
-       "NoEditAndContinue",
-       "NoPCH"
-    }
-    configuration "debug"
-        targetsuffix "d"
-    configuration "release"
-        flags {
-	    "Optimize"
-	}
-    configuration "not windows"
-        buildoptions { 
-            "-std=c++11",
-            "-Wno-unknown-pragmas"
-        }
-    configuration { "not windows", "debug" }
-        buildoptions { "-ggdb" }
-
-project "rana"
-    kind "StaticLib"
-    language "C++"
-    targetdir "../lib/"
-    includedirs { 
-       "../include/rana"
-    }
-    files {
-       "../source/**.cpp",
-       "../include/rana/**.hpp"
+       "../benchmark/main.cpp",
+       "../include/rana/*.hpp"
     }
     flags { 
        "Unicode",
@@ -84,11 +56,8 @@ project "rana"
     }
     configuration "debug"
         targetsuffix "d"
-        flags { "FatalWarnings" }
     configuration "release"
-        flags {
-	    "Optimize"
-	}
+        flags { "Optimize" }
     configuration "not windows"
         buildoptions { 
             "-std=c++11",

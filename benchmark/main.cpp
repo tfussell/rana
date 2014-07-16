@@ -20,7 +20,6 @@ void benchmark()
     for(int i = 0; i < 1000; i++)
     {
 		parser.parse_string(file_string, result);
-        std::cout << result << std::endl;
     }
     
 	auto elapsed = std::chrono::high_resolution_clock::now() - start;
