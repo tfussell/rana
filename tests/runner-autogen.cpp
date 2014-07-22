@@ -21,7 +21,7 @@ int main( int argc, char *argv[] ) {
     return status;
 }
 bool suite_test_value_init = false;
-#include "/Users/thomas/Development/rana/tests/test_value.hpp"
+#include "/home/thomas/Development/rana/tests/test_value.hpp"
 
 static test_value suite_test_value;
 

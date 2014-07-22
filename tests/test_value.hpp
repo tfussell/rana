@@ -85,12 +85,12 @@ public:
     
     void test_types()
     {
-        TS_ASSERT(!rana::value::invalid.is_valid());
-        TS_ASSERT(rana::value::null.is_null());
-        TS_ASSERT(rana::value::object.is_object());
-        TS_ASSERT(rana::value::object.is_container());
-        TS_ASSERT(rana::value::array.is_array());
-        TS_ASSERT(rana::value::array.is_container());
+        TS_ASSERT(!rana::value::invalid().is_valid());
+        TS_ASSERT(rana::value::null().is_null());
+        TS_ASSERT(rana::value::object().is_object());
+        TS_ASSERT(rana::value::object().is_container());
+        TS_ASSERT(rana::value::array().is_array());
+        TS_ASSERT(rana::value::array().is_container());
         TS_ASSERT(rana::value(1).is_number());
         TS_ASSERT(rana::value(1.123).is_number());
         const char *str = "abc";

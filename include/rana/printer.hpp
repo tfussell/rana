@@ -13,9 +13,9 @@ public:
 
 	printer &encoding(rana::encoding e) { encoding_ = e; return *this; }
 	rana::encoding get_encoding() const { return encoding_; }
-	printer &ascii(bool enable) { encoding_ = enable ? encoding::ascii : encoding::utf8; return *this; }
-	printer &latin1(bool enable) { encoding_ = enable ? encoding::latin1 : encoding::utf8; return *this; }
-	printer &utf8(bool enable) { encoding_ = enable ? encoding::utf8 : encoding::ascii; return *this; }
+        printer &ascii(bool enable) { encoding_ = enable ? rana::encoding::ascii : rana::encoding::utf8; return *this; }
+	printer &latin1(bool enable) { encoding_ = enable ? rana::encoding::latin1 : rana::encoding::utf8; return *this; }
+	printer &utf8(bool enable) { encoding_ = enable ? rana::encoding::utf8 : rana::encoding::ascii; return *this; }
 	printer &pretty(bool enable) { indent(enable); space_after(enable); space_before(enable); return *this; }
 	printer &indent(bool enable) { indent_ = enable; return *this; }
 	printer &indent_length(std::size_t length) { indent_length_ = length; return *this; }

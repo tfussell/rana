@@ -214,7 +214,7 @@ private:
                 }
                 else
                 {
-                    push_array();
+		    push(value::array().copy());
                 }
                 
                 popped_container_ = false;
@@ -244,7 +244,7 @@ private:
                 }
                 else
                 {
-                    push_object();
+		    push(value::object().copy());
                 }
                 
                 popped_container_ = false;
@@ -264,7 +264,7 @@ private:
                         throw make_error("Objects must consist of key:value pairs");
                     }
                     
-                    push_token();
+		    push(parse_token());
                 }
                 else if (key_.first)
                 {
@@ -279,7 +279,7 @@ private:
             {
                 if (!token_string_.empty())
                 {
-                    push_token();
+		    push(parse_token());
                 }
                 else if (!popped_container_)
                 {
@@ -305,7 +305,7 @@ private:
         }
     }
     
-	value parse_token()
+    value parse_token()
     {
         switch (token_string_[0])
         {
