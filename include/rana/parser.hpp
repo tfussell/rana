@@ -575,14 +575,14 @@ private:
                 throw make_error("missing key for value");
             }
             
-            auto inserted_iter = top().emplace_object(std::move(key_.second), parse_token()).first;
+            auto inserted_iter = top().emplace_object(std::move(key_.second), std::move(v)).first;
             inserted = &inserted_iter->second;
             key_.first = false;
             key_.second.clear();
         }
         else if (top().is_array())
         {
-            inserted = &*top().emplace_array(parse_token());
+            inserted = &*top().emplace_array(std::move(v));
         }
         else
         {
