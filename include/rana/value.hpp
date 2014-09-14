@@ -1,5 +1,6 @@
 #pragma once
 
+#include <functional>
 #include <stdexcept>
 #include <string>
 
@@ -188,7 +189,7 @@ public:
 			return array_[index_];
 		}
 
-		const container_pointer operator->() const
+		container_pointer operator->() const
 		{
 			return &array_[index_];
 		}

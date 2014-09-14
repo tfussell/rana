@@ -1,5 +1,8 @@
 #pragma once
 
+#include <fstream>
+#include <iostream>
+#include <sstream>
 #include <vector>
 
 #include "value.hpp"
@@ -73,10 +76,10 @@ private:
         std::string error_message = "during parsing of JSON string at line " + std::to_string(line) + ", column " + std::to_string(column) + ": ";
         error_message += " error: " + message + "\n";
         
-        int current_line = 1;
-        int i = 0;
-        int line_start = 0;
-        int line_end = 0;
+	std::size_t current_line = 1;
+	std::size_t i = 0;
+	std::size_t line_start = 0;
+	std::size_t line_end = 0;
         
         while (current_line <= line && i < buffer_length)
         {
@@ -111,7 +114,7 @@ private:
 class parser
 {
 public:
-	parser() : buffer_(nullptr), buffer_position_(0), line_(1), column_(0), root_(nullptr), popped_container_(false), state_(state::normal), surrogate_pair_({ 0, 0 }), unicode_nibble_(0)
+    parser() : buffer_(nullptr), buffer_position_(0), line_(1), column_(0), root_(nullptr), popped_container_(false), surrogate_pair_({ 0, 0 }), unicode_nibble_(0), state_(state::normal)
     {
     }
     
@@ -123,7 +126,7 @@ public:
 		root_ = &result;
 		stack_.push_back(root_);
 
-		if (stream)
+		if (stream.good())
 		{
 			char c;
 			bool still_parsing;
