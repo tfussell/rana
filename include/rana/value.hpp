@@ -1003,7 +1003,7 @@ private:
 };
 
 
-void swap(value &first, value &second)
+inline void swap(value &first, value &second)
 {
 	using std::swap;
 
