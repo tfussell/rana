@@ -767,7 +767,6 @@ public:
 	static const value &object() { static value v(value::type::object_t); return v; }
 	static const value &invalid() { static value v(value::type::invalid_t); return v; }
 
-private:
 	// Iterators
 	array_iterator array_begin()
 	{
@@ -819,6 +818,7 @@ private:
 		return const_object_iterator(container_, size_, size_);
 	}
 
+private:
 	size_type hash(const std::string &key) const
 	{
 		return hasher_(key) % size_;
