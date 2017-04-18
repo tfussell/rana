@@ -1,6 +1,7 @@
 <img height="100" src="http://tfussell.github.io/rana/images/rana.png"><br/>
 ====
 rana is a C++ library for reading and writing JavaScript Object Notation (JSON) files with an emphasis on ease-of-use.
+###*Note (04/18/2017): This project was created to help me learn modern C++ and recursive descent parsing. It is no longer maintained. [Niels Lohmann's awesome json library](https://github.com/nlohmann/json) uses many of the same ideas and has become the de facto standard library for JSON parsing and serialization.*
 
 ## Quick start
 
